@@ -10,12 +10,20 @@ public class GameRect {
     private int y;
     private int width;
     private int height;
-
+    private boolean invisible =false;
     public GameRect(int x, int y, int width, int height) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+    }
+
+    public boolean isInvisible() {
+        return invisible;
+    }
+
+    public void setInvisible(boolean invisible) {
+        this.invisible = invisible;
     }
 
     public int getX() {

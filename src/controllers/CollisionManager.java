@@ -23,6 +23,8 @@ public class CollisionManager {
                 GameRect rectj = cj.getGameRect();
 
                 if(recti.intersects(rectj)){
+                    ci.onCollide(cj);
+                    cj.onCollide(ci);
                     System.out.println("Boom");
                 }
             }

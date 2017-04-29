@@ -25,6 +25,7 @@ public class Controller  {
     }
 
     public void draw(Graphics graphics){
+        if (gameRect.isInvisible()) return;
         imageRenderer.render(graphics,gameRect);
     }
     public void update(){

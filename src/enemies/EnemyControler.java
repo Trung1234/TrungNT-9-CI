@@ -28,6 +28,10 @@ public class EnemyControler extends Controller implements Collider{
 
         }
     }
+    public void getHit(int damage){
+        gameRect.setInvisible(true);
+        System.out.println(String.format("Get hir %s",damage));
+    }
     public void draw(Graphics graphics) {
         imageRenderer.render(graphics, gameRect);
     }
