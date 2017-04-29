@@ -18,6 +18,7 @@ public class ImageRenderer {
         this(Utils.loadImage(path));
     }
     public void render(Graphics graphics, GameRect gameRect){
-        graphics.drawImage(image,gameRect.getX(),gameRect.getY(),gameRect.getWidth(),gameRect.getHeight(),null);
+        graphics.drawImage(image,gameRect.getX(),gameRect.getY(),
+                gameRect.getWidth(),gameRect.getHeight(),null);
     }
 }

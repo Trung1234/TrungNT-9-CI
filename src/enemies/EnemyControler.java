@@ -11,13 +11,22 @@ import java.awt.*;
 public class EnemyControler {
     private ImageRenderer imageRenderer;
     private GameRect gameRect;
+    private MoveBehavior moveBehavior;
     public EnemyControler(int x, int y, Image image){
         imageRenderer = new ImageRenderer(image);
         gameRect = new GameRect(x,y,image.getWidth(null),image.getHeight(null));
-
+        moveBehavior=new MoveBehavior();
     }
+
+    public void setMoveBehavior(MoveBehavior moveBehavior) {
+        this.moveBehavior = moveBehavior;
+    }
+
     public void update(){
-        gameRect.move(0,3);
+        if(moveBehavior!=null){
+            moveBehavior.move(gameRect);
+
+        }
     }
     public void draw(Graphics graphics) {
         imageRenderer.render(graphics, gameRect);

@@ -27,9 +27,7 @@ public class Player {
         this.enableShoot = true;
         bullets = new ArrayList<>();
         planeEnemies = new ArrayList<>();
-        PlaneEnemy planeEnemy;
-        PlaneEnemy planeEnemy1 = new PlaneEnemy(160 , 0, Utils.loadImage("res/enemy_plane_yellow_2.png"));
-        planeEnemies.add(planeEnemy1);
+        PlaneEnemy planeEnemy1 = new PlaneEnemy(150 , 0, Utils.loadImage("res/enemy_plane_yellow_2.png"));planeEnemies.add(planeEnemy1);
         PlaneEnemy planeEnemy2 = new PlaneEnemy(160 , 40, Utils.loadImage("res/enemy_plane_yellow_2.png"));
         planeEnemies.add(planeEnemy2);
         PlaneEnemy planeEnemy3 = new PlaneEnemy(160 , 80, Utils.loadImage("res/enemy_plane_yellow_2.png"));
@@ -63,7 +61,7 @@ public class Player {
                 bullets.add(bullet);
 
                 enableShoot = false;
-                coolDownTime = 50;
+                coolDownTime = 10;
 
         }
     }

@@ -1,21 +1,21 @@
-package controllers;/*
+package main;/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
+import controllers.Player;
 import enemies.EnemyControler;
+import enemies.HorizMoveBehavior;
 import ultils.Utils;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,15 +28,29 @@ public class GameWindow extends Frame {
     Player player;
     boolean isUpPressed, isDownPressed, isRightPressed, isLeftPressed;
     boolean isSpaceImage;
-    EnemyControler enemyControler;
+    private ArrayList<EnemyControler> enemyControlers =new ArrayList<>();
     BufferedImage backbufferedImage;
     Graphics backBufferedgraphics;
-
+    int coundowntime;
+    private boolean creatNewEnemyEnable = true;
     public GameWindow() {
         player=new Player(200-10, 300-10, Utils.loadImage("res/plane2.png"));
         backbufferedImage = new BufferedImage(600, 800, BufferedImage.TYPE_INT_ARGB);
         backBufferedgraphics = backbufferedImage.getGraphics();
-        enemyControler = new EnemyControler(100,0,Utils.loadImage("res/enemy-green-3.png"));
+        if (creatNewEnemyEnable) {
+            for (int x=30;x< 330;x+=60){
+                EnemyControler enemyControler = new EnemyControler(x,0,Utils.loadImage("res/enemy-green-3.png"));
+                enemyControler.setMoveBehavior(new HorizMoveBehavior());
+                enemyControlers.add(enemyControler);
+                creatNewEnemyEnable=false;
+                coundowntime=50;
+            }
+        } else {
+            coundowntime--;
+            if (coundowntime == 0) {
+                creatNewEnemyEnable = true;
+            }
+        }
         setVisible(true);
         setSize(600, 800);
         // listener: 
@@ -129,13 +143,10 @@ public class GameWindow extends Frame {
             }
         });
 //
-        try {
-            backgroundImage = ImageIO.read(new File("res/background.png"));
-            //player = ImageIO.read(new File("res/plane2.png"));
 
-        } catch (IOException ex) {
-            Logger.getLogger(GameWindow.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            backgroundImage= Utils.loadImage("res/background.png");
+            //backgroundImage = ImageIO.read(new File("res/background.png"));
+            //player = ImageIO.read(new File("res/plane2.png"));
         // Step 2: Draw
         // redraw
         Thread thread = new Thread(new Runnable() {
@@ -153,7 +164,15 @@ public class GameWindow extends Frame {
                     //logic
                     player.move(isUpPressed,isDownPressed,isRightPressed,isLeftPressed,isSpaceImage);
                     player.update();
-                    enemyControler.update();
+                    if (creatNewEnemyEnable=true){
+
+                        coundowntime++;
+                    }
+
+                    for (EnemyControler enemyControler : enemyControlers){
+                        enemyControler.update();
+                    }
+
                     //draw
                     repaint();
                 }
@@ -171,7 +190,10 @@ public class GameWindow extends Frame {
         backBufferedgraphics.drawImage(backgroundImage, 0, 0, 600, 800, null);
        player.draw(backBufferedgraphics);
 
-        enemyControler.draw(backBufferedgraphics);
+        for(EnemyControler enemyControler: enemyControlers){
+            enemyControler.draw(backBufferedgraphics);
+        }
+
         g.drawImage(backbufferedImage, 0, 0, this);// draw backbuffer on game window
     }
 

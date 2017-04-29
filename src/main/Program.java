@@ -1,7 +1,5 @@
 package main;
 
-import controllers.GameWindow;
-
 /**
  * Created by My PC on 26/04/2017.
  */
