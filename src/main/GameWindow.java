@@ -4,6 +4,7 @@ package main;/*
  * and open the template in the editor.
  */
 
+import controllers.CollisionManager;
 import controllers.Player;
 import enemies.EnemyControler;
 import enemies.HorizMoveBehavior;
@@ -172,6 +173,7 @@ public class GameWindow extends Frame {
                     for (EnemyControler enemyControler : enemyControlers){
                         enemyControler.update();
                     }
+                    CollisionManager.instance.update();
 
                     //draw
                     repaint();
