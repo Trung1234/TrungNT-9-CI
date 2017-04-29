@@ -1,5 +1,7 @@
 package models;
 
+import java.awt.*;
+
 /**
  * Created by My PC on 26/04/2017.
  */
@@ -34,5 +36,10 @@ public class GameRect {
     public void move(int dx,int dy){
         this.x +=dx;
         this.y +=dy;
+    }
+    public boolean intersects(GameRect other){
+        Rectangle rect1 = new Rectangle(x,y,width,height);
+        Rectangle rect2 = new Rectangle(other.x,other.y,other.width,other.height);
+        return  rect1.intersects(rect2);
     }
 }
