@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c0119eb4-bc26-42ed-a2a6-6b0c9728ddee" name="Default" comment="" />
+    <list default="true" id="c0119eb4-bc26-42ed-a2a6-6b0c9728ddee" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/GameWindow.java" afterPath="$PROJECT_DIR$/src/main/GameWindow.java" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -40,8 +42,8 @@
       <file leaf-file-name="GameWindow.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/GameWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="142">
-              <caret line="196" column="9" lean-forward="false" selection-start-line="196" selection-start-column="9" selection-end-line="196" selection-end-column="9" />
+            <state relative-caret-position="148">
+              <caret line="198" column="10" lean-forward="false" selection-start-line="198" selection-start-column="10" selection-end-line="198" selection-end-column="10" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -161,13 +163,13 @@
         <option value="$PROJECT_DIR$/src/interface/Collider.kt" />
         <option value="$PROJECT_DIR$/src/enemies/MoveBehavior.java" />
         <option value="$PROJECT_DIR$/src/enemies/HorizMoveBehavior.java" />
-        <option value="$PROJECT_DIR$/src/main/GameWindow.java" />
         <option value="$PROJECT_DIR$/src/controllers/CollisionManager.java" />
         <option value="$PROJECT_DIR$/src/enemies/Collider.java" />
         <option value="$PROJECT_DIR$/src/controllers/Bullet.java" />
         <option value="$PROJECT_DIR$/src/controllers/Controller.java" />
         <option value="$PROJECT_DIR$/src/models/GameRect.java" />
         <option value="$PROJECT_DIR$/src/enemies/EnemyControler.java" />
+        <option value="$PROJECT_DIR$/src/main/GameWindow.java" />
       </list>
     </option>
   </component>
@@ -1063,8 +1065,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/GameWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="196" column="9" lean-forward="false" selection-start-line="196" selection-start-column="9" selection-end-line="196" selection-end-column="9" />
+        <state relative-caret-position="148">
+          <caret line="198" column="10" lean-forward="false" selection-start-line="198" selection-start-column="10" selection-end-line="198" selection-end-column="10" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
