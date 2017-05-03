@@ -17,6 +17,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -195,9 +196,16 @@ public class GameWindow extends Frame {
         for(EnemyControler enemyControler: enemyControlers){
             enemyControler.draw(backBufferedgraphics);
         }
-        for(EnemyControler enemyControler: enemyControlers){
+//        for(EnemyControler enemyControler: enemyControlers){
+//            if (enemyControler.getGameRect().isDead()){
+//                enemyControlers.remove(enemyControler);
+//            }
+//        }
+        Iterator<EnemyControler> enemyIterator = enemyControlers.iterator();
+        while (enemyIterator.hasNext()){
+            EnemyControler enemyControler = enemyIterator.next();
             if (enemyControler.getGameRect().isDead()){
-                enemyControlers.remove(enemyControler);
+                enemyIterator.remove();
             }
         }
         g.drawImage(backbufferedImage, 0, 0, this);// draw backbuffer on game window
