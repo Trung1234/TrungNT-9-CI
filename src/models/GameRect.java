@@ -10,6 +10,7 @@ public class GameRect {
     private int y;
     private int width;
     private int height;
+    private boolean dead =false;
     private boolean invisible =false;
     public GameRect(int x, int y, int width, int height) {
         this.x = x;
@@ -49,5 +50,13 @@ public class GameRect {
         Rectangle rect1 = new Rectangle(x,y,width,height);
         Rectangle rect2 = new Rectangle(other.x,other.y,other.width,other.height);
         return  rect1.intersects(rect2);
+    }
+
+    public boolean isDead() {
+        return dead;
+    }
+
+    public void setDead(boolean dead) {
+        this.dead = dead;
     }
 }

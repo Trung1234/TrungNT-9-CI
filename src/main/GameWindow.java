@@ -195,7 +195,11 @@ public class GameWindow extends Frame {
         for(EnemyControler enemyControler: enemyControlers){
             enemyControler.draw(backBufferedgraphics);
         }
-
+        for(EnemyControler enemyControler: enemyControlers){
+            if (enemyControler.getGameRect().isDead()){
+                enemyControlers.remove(enemyControler);
+            }
+        }
         g.drawImage(backbufferedImage, 0, 0, this);// draw backbuffer on game window
     }
 
