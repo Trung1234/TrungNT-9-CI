@@ -196,8 +196,6 @@ public class GameWindow extends Frame {
             enemyControler.draw(backBufferedgraphics);
         }
 
-        //đứ
-
         g.drawImage(backbufferedImage, 0, 0, this);// draw backbuffer on game window
     }
 
