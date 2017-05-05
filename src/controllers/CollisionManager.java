@@ -22,15 +22,28 @@ public class CollisionManager {
                 GameRect recti = ci.getGameRect();
                 GameRect rectj = cj.getGameRect();
 
+                if (recti == null) {
+                    System.out.println(ci.toString() + "null rect");
+                }
+
+                if (rectj == null) {
+                    System.out.println(cj.toString() + "null rect");
+                }
+
                 if(recti.intersects(rectj)){
                     ci.onCollide(cj);
                     cj.onCollide(ci);
-                    System.out.println("Boom");
+                    //System.out.println("Boom");
                 }
             }
         }
     }
     public void add(Collider collider){
         colliders.add(collider);
+    }
+    public void remove(Collider collider){
+        if(collider.getGameRect().isDead()){
+            colliders.remove(collider);
+        }
     }
 }

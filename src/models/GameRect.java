@@ -10,6 +10,7 @@ public class GameRect {
     private int y;
     private int width;
     private int height;
+    private boolean isDead =false;
     private boolean invisible =false;
     public GameRect(int x, int y, int width, int height) {
         this.x = x;
@@ -36,6 +37,14 @@ public class GameRect {
 
     public int getWidth() {
         return width;
+    }
+
+    public boolean isDead() {
+        return isDead;
+    }
+
+    public void setDead(boolean dead) {
+        isDead = dead;
     }
 
     public int getHeight() {

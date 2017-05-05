@@ -17,7 +17,9 @@ public class Bullet extends Controller implements Collider{
                 new ImageRenderer(image));
         CollisionManager.instance.add(this);
     }
-
+    public void getHit(){
+        gameRect.setDead(true);
+    }
     @Override
     public void update() {
         gameRect.move(0,-15);
@@ -29,5 +31,10 @@ public class Bullet extends Controller implements Collider{
         if (other instanceof EnemyControler){
             ((EnemyControler)other).getHit(damage);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Bullet";
     }
 }

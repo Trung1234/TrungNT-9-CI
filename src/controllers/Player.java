@@ -1,6 +1,9 @@
 package controllers;
 
 import controllers.PlaneEnemy;
+import enemies.Collider;
+import enemies.EnemyBulletController;
+import enemies.EnemyControler;
 import models.GameRect;
 import ultils.Utils;
 import views.ImageRenderer;
@@ -11,8 +14,7 @@ import java.util.ArrayList;
 /**
  * Created by My PC on 12/04/2017.
  */
-public class Player {
-    private GameRect gameRect;
+public class Player extends Controller implements Collider{
 
     private ImageRenderer imageRenderer;
     private boolean enableShoot = true;
@@ -21,10 +23,28 @@ public class Player {
     private int coolDownTime;
     private int dx;
     private int dy;
+    private int HPPlayer =15;
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+    @Override
+    public String toString() {
+        return "Player";
+    }
+
+    private int damage = 1;
     public Player(int xPlane, int yPlane, Image image) {
         imageRenderer = new ImageRenderer(image);
         gameRect = new GameRect(xPlane,yPlane,70,50);
+        CollisionManager.instance.add(this);
         this.enableShoot = true;
+
         bullets = new ArrayList<>();
         planeEnemies = new ArrayList<>();
         PlaneEnemy planeEnemy1 = new PlaneEnemy(150 , 0, Utils.loadImage("res/enemy_plane_yellow_2.png"));planeEnemies.add(planeEnemy1);
@@ -66,7 +86,9 @@ public class Player {
         }
     }
 
-
+    public void getHit(int damage){
+        gameRect.setDead(true);
+    }
     public void draw(Graphics graphics){
         imageRenderer.render(graphics,gameRect);
         //graphics.drawImage(this.image,gameRect.getX(),gameRect.getY(),50,50,null);
@@ -79,7 +101,11 @@ public class Player {
     }
     public void update(){
         gameRect.move(dx,dy);
-
+        System.out.println(HPPlayer);
+        if (HPPlayer <= 0) {
+            System.out.println("GAME OVER");
+            gameRect.setInvisible(true);
+        }
         for (Bullet bullet : bullets) {
             bullet.update();
         }
@@ -100,5 +126,26 @@ public class Player {
         for (PlaneEnemy planeEnemy : planeEnemies){
             planeEnemy.update();
         }
+    }
+
+
+    @Override
+    public void onCollide(Collider other) {
+        if (other instanceof EnemyBulletController) {
+            ((EnemyBulletController) other).getHit(damage);
+        }
+        if (other instanceof EnemyControler) {
+            ((EnemyControler) other).getHit(damage);
+            HPPlayer= HPPlayer-1;
+        }
+
+    }
+
+    public void setHPPlayer(int HPPlayer) {
+        this.HPPlayer = HPPlayer;
+    }
+
+    public int getHPPlayer() {
+        return HPPlayer;
     }
 }

@@ -1,7 +1,9 @@
 package enemies;
 
+import controllers.Bullet;
 import controllers.CollisionManager;
 import controllers.Controller;
+import controllers.Player;
 import models.GameRect;
 import views.ImageRenderer;
 
@@ -12,6 +14,8 @@ import java.awt.*;
  */
 public class EnemyControler extends Controller implements Collider{
     private MoveBehavior moveBehavior;
+    private boolean shootEnableEnemy;
+    private int damage=1;
     public EnemyControler(int x, int y, Image image){
         gameRect = new GameRect(x,y,image.getWidth(null),image.getHeight(null));
         imageRenderer = new ImageRenderer(image);
@@ -30,6 +34,8 @@ public class EnemyControler extends Controller implements Collider{
     }
     public void getHit(int damage){
         gameRect.setInvisible(true);
+        gameRect.setDead(true);
+        CollisionManager.instance.remove(this);
         //System.out.println(String.format("Get hit %s",damage));
     }
 //    public void draw(Graphics graphics) {
@@ -38,6 +44,16 @@ public class EnemyControler extends Controller implements Collider{
 
     @Override
     public void onCollide(Collider other) {
+        if(other instanceof Player){
+            ((Player) other).getHit(damage);
+        }
+        if(other instanceof Bullet){
+            ((Bullet)other).getHit();
+        }
+    }
 
+    @Override
+    public String toString() {
+        return "EnemyControler";
     }
 }

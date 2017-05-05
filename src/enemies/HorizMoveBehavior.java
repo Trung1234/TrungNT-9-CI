@@ -8,6 +8,6 @@ import models.GameRect;
 public class HorizMoveBehavior implements MoveBehavior{
     @Override
     public void move(GameRect gameRect) {
-        gameRect.move(3,3);
+        gameRect.move(4,1);
     }
 }

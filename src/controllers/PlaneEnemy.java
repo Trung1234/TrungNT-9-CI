@@ -33,4 +33,9 @@ public class PlaneEnemy {
             this.x += 5;
         }
     }
+
+    @Override
+    public String toString() {
+        return "PlaneEnemy";
+    }
 }

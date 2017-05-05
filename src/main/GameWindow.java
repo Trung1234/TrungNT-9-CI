@@ -4,8 +4,10 @@ package main;/*
  * and open the template in the editor.
  */
 
+
 import controllers.CollisionManager;
 import controllers.Player;
+import enemies.EnemyBulletController;
 import enemies.EnemyControler;
 import enemies.HorizMoveBehavior;
 import ultils.Utils;
@@ -17,6 +19,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,17 +32,22 @@ public class GameWindow extends Frame {
     Player player;
     boolean isUpPressed, isDownPressed, isRightPressed, isLeftPressed;
     boolean isSpaceImage;
+    ArrayList<EnemyBulletController> bulletControllers;
     private ArrayList<EnemyControler> enemyControlers =new ArrayList<>();
     BufferedImage backbufferedImage;
     Graphics backBufferedgraphics;
     int coundowntime;
     private boolean creatNewEnemyEnable = true;
+
+
     public GameWindow() {
         player=new Player(200-10, 300-10, Utils.loadImage("res/plane2.png"));
         backbufferedImage = new BufferedImage(600, 800, BufferedImage.TYPE_INT_ARGB);
+        bulletControllers = new ArrayList<>();
         backBufferedgraphics = backbufferedImage.getGraphics();
         if (creatNewEnemyEnable) {
             for (int x=30;x< 330;x+=60){
+                EnemyBulletController enbulletController = new EnemyBulletController(getX() + 12, x + 30, Utils.loadImage("res/bullet-round.png"));
                 EnemyControler enemyControler = new EnemyControler(x,0,Utils.loadImage("res/enemy-green-3.png"));
                 enemyControler.setMoveBehavior(new HorizMoveBehavior());
                 enemyControlers.add(enemyControler);
@@ -164,16 +172,27 @@ public class GameWindow extends Frame {
                     }
                     //logic
                     player.move(isUpPressed,isDownPressed,isRightPressed,isLeftPressed,isSpaceImage);
-                    player.update();
+
                     if (creatNewEnemyEnable=true){
 
                         coundowntime++;
                     }
-
+                    Iterator<EnemyBulletController> bulletEnemyIterator = bulletControllers.iterator();
+                    while (bulletEnemyIterator.hasNext()) {
+                        EnemyBulletController bulletEnemy1 = bulletEnemyIterator.next();
+                        if (bulletEnemy1.getGameRect().isDead()) {
+                            bulletEnemyIterator.remove();
+                            player.setHPPlayer(player.getHPPlayer() - bulletEnemy1.getDamage());
+                        }
+                    }
                     for (EnemyControler enemyControler : enemyControlers){
                         enemyControler.update();
                     }
+                    for (EnemyBulletController bullet : bulletControllers) {
+                        bullet.update();
+                    }
                     CollisionManager.instance.update();
+                    player.update();
 
                     //draw
                     repaint();
@@ -195,7 +214,9 @@ public class GameWindow extends Frame {
         for(EnemyControler enemyControler: enemyControlers){
             enemyControler.draw(backBufferedgraphics);
         }
-
+        for (EnemyBulletController bullet : bulletControllers) {
+            bullet.draw(backBufferedgraphics);
+        }
         g.drawImage(backbufferedImage, 0, 0, this);// draw backbuffer on game window
     }
 
