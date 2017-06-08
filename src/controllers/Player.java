@@ -1,9 +1,8 @@
 package controllers;
 
-import controllers.PlaneEnemy;
 import enemies.Collider;
 import enemies.EnemyBulletController;
-import enemies.EnemyControler;
+import enemies.EnemyController;
 import models.GameRect;
 import ultils.Utils;
 import views.ImageRenderer;
@@ -134,8 +133,8 @@ public class Player extends Controller implements Collider{
         if (other instanceof EnemyBulletController) {
             ((EnemyBulletController) other).getHit(damage);
         }
-        if (other instanceof EnemyControler) {
-            ((EnemyControler) other).getHit(damage);
+        if (other instanceof EnemyController) {
+            ((EnemyController) other).getHit(damage);
             HPPlayer= HPPlayer-1;
         }
 
@@ -147,5 +146,36 @@ public class Player extends Controller implements Collider{
 
     public int getHPPlayer() {
         return HPPlayer;
+    }
+
+    public void processInput(boolean isUpPressed,
+                             boolean isDownPressed,
+                             boolean isLeftPressed,
+                             boolean isRightPressed,
+                             boolean isSpacePressed) {
+        dx = 0;
+        dy = 0;
+
+        if (isUpPressed) {
+            dy -= 10;
+        }
+
+        if (isDownPressed) {
+            dy += 10;
+        }
+
+        if (isLeftPressed) {
+            dx -= 10;
+        }
+
+        if (isRightPressed) {
+            dx += 10;
+        }
+
+        if(isSpacePressed && !enableShoot) {
+            enableShoot = true;
+            Bullet bulletController = new Bullet(gameRect.getX() + 35, gameRect.getY(), Utils.loadImage("res/bullet.png"));
+            bullets.add(bulletController);
+        }
     }
 }

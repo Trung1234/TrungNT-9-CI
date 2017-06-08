@@ -12,11 +12,11 @@ import java.awt.*;
 /**
  * Created by My PC on 26/04/2017.
  */
-public class EnemyControler extends Controller implements Collider{
+public class EnemyController extends Controller implements Collider{
     private MoveBehavior moveBehavior;
     private boolean shootEnableEnemy;
     private int damage=1;
-    public EnemyControler(int x, int y, Image image){
+    public EnemyController(int x, int y, Image image){
         gameRect = new GameRect(x,y,image.getWidth(null),image.getHeight(null));
         imageRenderer = new ImageRenderer(image);
         CollisionManager.instance.add(this);
@@ -54,6 +54,6 @@ public class EnemyControler extends Controller implements Collider{
 
     @Override
     public String toString() {
-        return "EnemyControler";
+        return "EnemyController";
     }
 }

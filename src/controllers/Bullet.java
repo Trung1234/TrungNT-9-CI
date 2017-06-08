@@ -1,7 +1,7 @@
 package controllers;
 
 import enemies.Collider;
-import enemies.EnemyControler;
+import enemies.EnemyController;
 import models.GameRect;
 import views.ImageRenderer;
 
@@ -28,8 +28,8 @@ public class Bullet extends Controller implements Collider{
     @Override
     public void onCollide(Collider other) {
         // kiểm tra other là ênmycontroler
-        if (other instanceof EnemyControler){
-            ((EnemyControler)other).getHit(damage);
+        if (other instanceof EnemyController){
+            ((EnemyController)other).getHit(damage);
         }
     }
 
